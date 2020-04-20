@@ -1,98 +1,81 @@
 
-let val = document.getElementById("div").style.color;
+window.onload=function(){
+  
 
- function clickMeevent(obj) {
 
-    let droned = document.getElementById("div");
-    let col = droned.style.color;
 
-    if (obj.innerHTML == "Click Me"){
+//selectors - variables what we need to use
 
-        
 
-        obj.innerHTML = "Click Me<br>Click Me Again";
-        return;
+const todoInput = document.querySelector(".to-do-input");
+const todoButton = document.querySelector(".to-do-button");
+const todoList = document.querySelector(".to-do-list");
+
+
+// event and listeners
+
+todoButton.addEventListener("click", addTodo); // addTodo is a function name
+todoList.addEventListener("click", deleteCheck);
+
+//functions
+
+function addTodo(event){
+
+  // prevent from submitting 
+  
+event.preventDefault();
+
+// new DIV
+
+const toDoDiv = document.createElement("div");
+toDoDiv.classList.add("todo");
+
+
+// new LI
+
+const newJob = document.createElement("li");
+
+newJob.innerText = todoInput.value;
+newJob.classList.add("to-do-item");
+
+toDoDiv.appendChild(newJob);
+
+// new button 
+
+const completedButton = document.createElement("button");
+completedButton.innerHTML = '<i>OK<i/>';
+completedButton.classList.add("completed-button");
+
+toDoDiv.appendChild(completedButton);
+
+// new trash button
+
+const trashButton = document.createElement("button");
+trashButton.innerHTML = '<i>Bin<i/>';
+trashButton.classList.add("trash-button");
+
+toDoDiv.appendChild(trashButton);
+
+//append to main list
+
+todoList.appendChild(toDoDiv);
+
+// clear input value
+
+todoInput.value = "";
+
+
 }
 
-   if (obj.innerHTML == "Click Me<br>Click Me Again")
-{
+function deleteCheck(e){
+  const item = e.target;
 
-        obj.innerHTML = "Thank You";
-        return;
+  if (item.classList[0] === "trash-button")
+  {
+    const todo = item.parentElement;
+    todo.remove();
+  }
 
 }
 
-    if (obj.innerHTML == "Thank You"){
-
-        obj.innerHTML = "GoodBye";
-        return;
 }
-
-    if (obj.innerHTML == "GoodBye"){
-
-        obj.style.color = "red";
-        
-        return;
-
-
-    }
-
-   
-    
-    /* const element = document.querySelector('.element')
-
-    const fontSize = element.style.fontSize
-    console.log(fontSize) // 2em
-    
-    const color = element.style.color
-    console.log(color) // red */
-
-   
-
-
-       
- }
- 
-
-
-     function newFunction() {
-         alert('it works!');
-     }
-
-
-//document.getElementById("myColor").value = "#FF8040";
-//alert(document.getElementById("div").style.color);
-
-
-function go(){
-    
-    let droned = document.getElementById("div");
-    let col = droned.style.color;
-    document.getElementById(btn);
-    droned.style.color = "yellow";
-    btn.style.width = "150px";
-    document.getElementById("myAnchor").setAttribute("href", "https://www.w3schools.com");
-    console.log(col);
-}
-
-
-function change_myselect(sel) {
-    var obj, dbParam, xmlhttp, myObj, x, txt = "";
-    obj = { table: sel, limit: 20 };
-    dbParam = JSON.stringify(obj);
-    xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        myObj = JSON.parse(this.responseText);
-        txt += "<table border='1'>"
-        for (x in myObj) {
-          txt += "<tr><td>" + myObj[x].name + "</td></tr>";
-        }
-        txt += "</table>"    
-        document.getElementById("demo").innerHTML = txt;
-        }
-      };
-    xmlhttp.open("POST", "json_demo_db_post.php", true);
-    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xmlhttp.send("x=" + dbParam);
-  } 
