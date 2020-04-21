@@ -4,7 +4,7 @@ window.onload=function(){
 
 
 
-//selectors - variables what we need to use
+//selectors - variables what we need to use start with variables
 
 
 const todoInput = document.querySelector(".to-do-input");
@@ -16,12 +16,16 @@ const todoList = document.querySelector(".to-do-list");
 
 todoButton.addEventListener("click", addTodo); // addTodo is a function name
 todoList.addEventListener("click", deleteCheck);
+todoList.addEventListener("click", complete);
 
 //functions
+
+
 
 function addTodo(event){
 
   // prevent from submitting 
+ 
   
 event.preventDefault();
 
@@ -67,6 +71,7 @@ todoInput.value = "";
 
 }
 
+
 function deleteCheck(e){
   const item = e.target;
 
@@ -78,4 +83,26 @@ function deleteCheck(e){
 
 }
 
+function complete(e){
+
+const  item = e.target;
+
+if (item.classList[0] === "completed-button"){
+
+
+  const done = item.parentElement;
+  done.classList.add("complete");
+
 }
+
+}
+
+
+  
+  
+
+}
+
+
+
+
